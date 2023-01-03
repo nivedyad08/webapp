@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg h-50">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/admin">Admin</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="#">Users</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="#">Settings</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <a href='/admin/logout' class="btn btn-outline-light">Logout</a>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <section class="main-body">
+        <div class="container mt-3 mb-4">
+        <div class="col-lg-12 mt-4 mt-lg-0">
+            <div class="row">
+            <div class="col-md-12">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button class="btn btn-primary me-md-2 mb-4" type="button" data-bs-toggle="modal" data-bs-target="#createModal">Add new candidate</button>
+                </div>
+                {{#if message}}
+                    <div class="alert alert-success" role="alert">
+                        {{message}}
+                    </div>
+                {{/if}}
+                <span class="text-danger"><h6 class="text-center">{{error}}</h6></span>
+                <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
+                    <table class="table manage-candidates-top mb-0" id="list_users">
+                        <thead>
+                        <tr>
+                            <th>Candidate Name</th>
+                            <th class="text-center">Status</th>
+                            <th class="action text-right">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each users}}
+                            <tr class="candidates-list">
+                                <td class="title">
+                                <div class="thumb">
+                                    <img class="img-fluid" src="/images/profile-images/{{image}}" alt="">
+                                </div>
+                                <div class="candidate-list-details">
+                                    <div class="candidate-list-info">
+                                    <div class="candidate-list-title">
+                                        <h5 class="mb-0"><a href="#">{{first_name}} {{last_name}}</a></h5>
+                                    </div>
+                                    <div class="candidate-list-option">
+                                        <ul class="list-unstyled">
+                                        <li style="font-size: 1rem;"><i class="fas fa-envelope"></i> {{email}}</li>
+                                        <li><i class="fas fa-phone pr-1"></i> {{phone}}</li>
+                                        </ul>
+                                    </div>
+                                    </div>
+                                </div>
+                                </td>
+                                <td class="candidate-list-favourite-time text-center">
+                                <a class="candidate-list-favourite order-2 text-danger" href="#"><i class="fas fa-heart"></i></a>
+                                <span class="candidate-list-time order-1">Active</span>
+                                </td>
+                                <td>
+                                <ul class="list-unstyled mb-0 d-flex justify-content-start">
+                                    {{!-- <li><a href="#" class="text-primary" data-toggle="tooltip" title="" data-original-title="view"><i class="far fa-eye"></i></a></li> --}}
+                                    <li><a href="/admin/edit-user/{{_id}}" class="text-info" data-toggle="tooltip" data-bs-target="#editModal" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
+                                    <li><a href="/admin/delete-user/{{_id}}" onclick="return confirm('Are you sure you want to delete {{first_name}} {{last_name}}?')" class="text-danger" data-toggle="tooltip" title="" data-original-title="Delete"><i class="far fa-trash-alt"></i></a></li>
+                                </ul>
+                                </td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- Button trigger modal -->
+    <!-- Create Modal -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create User</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/admin/addUser" method="post" enctype="multipart/form-data" autocomplete="off">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" pattern="(^[A-Za-z]+$)$" title="please enter a valid name" required="" class="form-control" name="first_name" aria-describedby="firstName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" required="" pattern="(^[A-Za-z]+$)$" title="please enter a valid name" class="form-control" name="last_name" aria-describedby="lastName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="emailAdress" class="form-label">Email address</label>
+                            <input type="email" required="" title="please enter a valid email" class="form-control" name="email" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="emailAdress" class="form-label">Password</label>
+                            <input title="password should contain atleast 6 character" pattern="^.{6,}$"
+                        required="" type="password" class="form-control" name="password" aria-describedby="password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="number" title="please enter a valid phone number" pattern="^\d{10}$" required="" class="form-control" name="phone" aria-describedby="phone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="profileImage" class="form-label">Profile Image</label>
+                            <input type="file" required="" class="form-control" name="profileImage" aria-describedby="profileImage">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready( function () {
+        $('#list_users').DataTable();
+    });
+</script>
+</body>
+</html>

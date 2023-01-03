@@ -1,0 +1,46 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <h2 class="text-center mb-4">Edit User</h2>
+            <form action="/admin/update-user/{{user._id}}" method="post" enctype="multipart/form-data">
+                <div class="panel panel-default">
+                    <div class="panel-body text-center">
+                        <img src="/images/profile-images/{{user.image}}" id="showImage" class="img-circle profile-avatar" alt="User avatar">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" name="first_name" value="{{user.first_name}}" aria-describedby="firstName">
+                </div>
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" name="last_name" value="{{user.last_name}}" aria-describedby="lastName">
+                </div>
+                <div class="mb-3">
+                    <label for="emailAdress" class="form-label">Email address</label>
+                    <input type="email" class="form-control" name="email" value="{{user.email}}" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="emailAdress" class="form-label">Phone</label>
+                    <input type="number" class="form-control" name="phone" value="{{user.phone}}" aria-describedby="phone">
+                </div>
+                <div class="mb-3">
+                    <label for="profileImage" class="form-label">Profile Image</label>
+                    <input type="file" class="form-control" onchange="viewImage(event)" name="profileImage" aria-describedby="profileImage">
+                    <input type="hidden" name="profileImage" id="profileImage" value="{{user.image}}">
+                </div>
+                <button class="btn btn-primary">Save changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function viewImage(event){
+        //createObjectURL() static method creates a string containing a URL 
+        //representing the object given in the parameter
+        document.getElementById('showImage').src = URL.createObjectURL(event.target.files[0])
+        var name = document.getElementById('showImage'); 
+        document.getElementById('profileImage').value = event.target.files[0].name
+    }
+</script>

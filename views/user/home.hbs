@@ -1,0 +1,26 @@
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-12  col-sm-offset-2">
+    <div class="panel panel-white profile-widget">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="image-container bg2">  
+                    <img src="/images/profile-images/{{user.image}}" class="avatar" alt="avatar"> 
+                </div>
+            </div>
+            <div class="col-sm-12">
+                {{#if user}}
+                    <div class="details">
+                        <h4>{{user.first_name}} {{user.last_name}} <i class="fa fa-sheild"></i></h4>
+                        <div>{{user.email}}</div>
+                        <div>{{user.phone}}</div>
+                        <a href='/user/logout' class="btn btn-outline-success mt-4">Logout</a>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>        
+</div>
+
+</div>
+</div>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sub-wrapper">
+            <div class="inner">
+                <span class="text-danger"><h6 class="text-center">{{error}}</h6></span>
+                <form action="/signup/submit" method="post" enctype="multipart/form-data">
+                    <h4 class="text-center">Sign Up</h4>
+                    <label>First Name</label><br>
+                    <input pattern="(^[A-Za-z]+$)$" title="please enter a valid name" required="" class="form-control"
+                        type="text" name="first_name" id="first_name">
+                    <span class="error" id="firstNameErr"></span><br>
+                    <label>Last Name</label>
+                    <input required="" pattern="(^[A-Za-z]+$)$" title="please enter a valid name" class="form-control"
+                        type="text" name="last_name" id="last_name">
+                    <span class="error" id="lastNameErr"></span><br>
+                    <label>Email address</label>
+                    <input required="" title="please enter a valid email" class="form-control" type="email" name="email"
+                        id="email">
+                    <span class="error" id="emailErr"></span><br>
+                    <label>Password</label>
+                    <input class="form-control" title="password should contain atleast 6 character" pattern="^.{6,}$"
+                        required="" type="password" name="password" id="password">
+                    <span class="error" id="passwordErr"></span><br>
+                    <label>Phone Number</label>
+                    <input class="form-control" title="please enter a valid phone number" pattern="^\d{10}$" required=""
+                        type="text" name="phone" id="phone">
+                    <span class="error" id="phoneErr"></span><br>
+                    <label>Upload Image</label>
+                    <input required="" class="form-control" type="file" name="profile_pic" id="profile_pic">
+                    <span class="error" id="imageErr"></span><br>
+                    <button type="submit" class="cust-btn mt-2">Sign Up</button>
+                    <br>
+                </form>
+                <span>Already a member ?<a href="/login">Login</a></span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
